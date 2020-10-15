@@ -7,21 +7,20 @@
             <div>
                 <a-input-search v-model="keyword" style="width: 300px;" placeholder="搜索 名称 / 主条码"
                                 @search="handleSearch"/>
+                <a-button type="primary" @click="priceSearch">价格查询</a-button>
                 <a-upload name="file"
                           :show-upload-list="false"
                           :multiple="false"
                           :before-upload="beforeUpload">
-                    <a-button type="primary"
-                              :loading="loading"
+                    <a-button :loading="loading"
                               icon="upload">批量导入
                     </a-button>
                 </a-upload>
-<!--                <a-button>批量删除</a-button>-->
-                <a-button type="primary" @click="priceSearch">价格查询</a-button>
+                <a-button @click="batchRemove">批量删除</a-button>
                 <a-button @click="openDev">调试</a-button>
             </div>
         </div>
-        <s-table :config="{dataSource: data, pagination: false}"
+        <s-table :config="{dataSource: data, rowKey: '_id', pagination: false, rowSelection: { selectedRowKeys: selectedRowKeys, onChange: onSelectChange }}"
                  :offset-height="60"
                  auto-height>
             <s-table-column title="#" :width="80">
@@ -87,7 +86,8 @@
                 currentCode: '',
                 priceSearchVisible: false,
                 totalCount: 0,
-                keyword: ''
+                keyword: '',
+                selectedRowKeys: []
             };
         },
         created() {
@@ -176,6 +176,17 @@
             },
             openDev() {
                 remote.getCurrentWebContents().openDevTools()
+            },
+            onSelectChange(selectedRowKeys) {
+                this.selectedRowKeys = selectedRowKeys
+            },
+            batchRemove() {
+                if(confirm('确定要删除当前所选商品吗？')){
+                    this.$db.remove({_id: {$in: this.selectedRowKeys}}, {multi: true}, (err, num) => {
+                        this.loadData()
+                        this.$message.success('删除成功！')
+                    })
+                }
             }
         },
         beforeDestroy() {

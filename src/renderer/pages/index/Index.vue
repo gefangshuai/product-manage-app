@@ -48,6 +48,7 @@
             <a-pagination v-model="currentPage" :total="totalCount" @change="handlePageChange"/>
         </div>
         <a-modal v-model="priceSearchVisible"
+                 :width="800"
                  :mask-closable="false"
                  :footer="null"
                  title="扫描商品，查询价格">
@@ -130,11 +131,6 @@
                         }
                         console.log(index, product)
                         this.saveOrUpdate(product)
-                        if(data.length === index + 1) {
-                            this.loading = false
-                            this.$message.success('导入成功！')
-                            location.reload()
-                        }
                     })
                    
                 } catch (e) {

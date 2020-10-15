@@ -5,7 +5,7 @@
                 商品列表 （共 {{ totalCount }} 条记录）
             </h3>
             <div>
-                <a-input-search v-model="keyword" style="width: 300px;" placeholder="搜索 名称 / 主条码"
+                <a-input-search v-model="keyword" style="width: 300px;" placeholder="搜索名称"
                                 @search="handleSearch"/>
                 <a-button type="primary" @click="priceSearch">价格查询</a-button>
                 <a-upload name="file"

@@ -20,9 +20,10 @@
                 <a-button @click="openDev">调试</a-button>
             </div>
         </div>
-        <s-table :config="{dataSource: data, rowKey: '_id', pagination: false, rowSelection: { selectedRowKeys: selectedRowKeys, onChange: onSelectChange }}"
-                 :offset-height="60"
-                 auto-height>
+        <s-table
+            :config="{dataSource: data, rowKey: '_id', pagination: false, rowSelection: { selectedRowKeys: selectedRowKeys, onChange: onSelectChange }}"
+            :offset-height="60"
+            auto-height>
             <s-table-column title="#" :width="80">
                 <template slot-scope="{index}">
                     {{ (currentPage - 1) * 10 + index + 1 }}
@@ -132,7 +133,7 @@
                         console.log(index, product)
                         this.saveOrUpdate(product)
                     })
-                   
+
                 } catch (e) {
                     this.$nextTick(_ => {
                         this.$message.error('导入失败，请重试！')
@@ -181,11 +182,16 @@
                 this.selectedRowKeys = selectedRowKeys
             },
             batchRemove() {
-                if(confirm('确定要删除当前所选商品吗？')){
-                    this.$db.remove({_id: {$in: this.selectedRowKeys}}, {multi: true}, (err, num) => {
-                        this.loadData()
-                        this.$message.success('删除成功！')
-                    })
+                if (this.selectedRowKeys.length > 0) {
+                    if (confirm(`确定要删除当前所选 ${this.selectedRowKeys.length} 个商品吗？`)) {
+                        this.$db.remove({_id: {$in: this.selectedRowKeys}}, {multi: true}, (err, num) => {
+                            this.selectedRowKeys = []
+                            this.loadData()
+                            this.$message.success('删除成功！')
+                        })
+                    }
+                } else {
+                    this.$message.warning('请勾选要删除的商品！')
                 }
             }
         },

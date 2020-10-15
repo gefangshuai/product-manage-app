@@ -118,7 +118,8 @@
                     let workbook = XLSX.readFile(file.path);
                     let sheetName = workbook.SheetNames[0]
                     let sheet = workbook.Sheets[sheetName]
-                    XLSX.utils.sheet_to_json(sheet).forEach(item => {
+                    let data = XLSX.utils.sheet_to_json(sheet)
+                    data.forEach((item, index) => {
                         let product = {
                             key: item['自编号'],
                             code: item['条码'],
@@ -127,11 +128,15 @@
                             discount: item['零售折扣'],
                             sellPrice: item['折后价']
                         }
+                        console.log(index, product)
                         this.saveOrUpdate(product)
+                        if(data.length === index + 1) {
+                            this.loading = false
+                            this.$message.success('导入成功！')
+                            location.reload()
+                        }
                     })
-                    this.loading = false
-                    this.$message.success('导入成功！')
-                    location.reload()
+                   
                 } catch (e) {
                     this.$nextTick(_ => {
                         this.$message.error('导入失败，请重试！')
@@ -152,6 +157,7 @@
                 })
             },
             saveOrUpdate(product) {
+                console.log('save', product)
                 //商品名称	主条码	单位	进价	零售价	备注
                 this.findByKey(product.key).exec((err, doc) => {
                     if (doc) {

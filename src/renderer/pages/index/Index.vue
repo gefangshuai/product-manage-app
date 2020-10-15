@@ -112,28 +112,53 @@
                 })
             },
             findByKey(key) {
-                return this.$db.findOne({key: key})
+                return new Promise((resolve, reject) => {
+                    this.$db.findOne({key: key}).exec((err, doc) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(doc)
+                        }
+                    })
+                })
             },
-            beforeUpload(file) {
+            async beforeUpload(file) {
                 try {
                     this.loading = true
-                    let workbook = XLSX.readFile(file.path);
-                    let sheetName = workbook.SheetNames[0]
-                    let sheet = workbook.Sheets[sheetName]
-                    let data = XLSX.utils.sheet_to_json(sheet)
-                    data.forEach((item, index) => {
-                        let product = {
-                            key: item['自编号'],
-                            code: item['条码'],
-                            name: item['书籍名称'],
-                            price: item['定价'],
-                            discount: item['零售折扣'],
-                            sellPrice: item['折后价']
-                        }
-                        console.log(index, product)
-                        this.saveOrUpdate(product)
+                    this.$nextTick(_ => {
+                        let workbook = XLSX.readFile(file.path);
+                        let sheetName = workbook.SheetNames[0]
+                        let sheet = workbook.Sheets[sheetName]
+                        let data = XLSX.utils.sheet_to_json(sheet)
+                        let index = 1
+                        data.forEach(async (item) => {
+                            let product = {
+                                key: item['自编号'],
+                                code: item['条码'],
+                                name: item['书籍名称'],
+                                price: item['定价'],
+                                discount: item['零售折扣'],
+                                sellPrice: item['折后价']
+                            }
+                            console.log(index, data.length, product)
+                            const finish = () => {
+                                index += 1
+                                if (index === data.length) {
+                                    setTimeout(_ => {
+                                        alert('导入成功！')
+                                        location.reload()
+                                    }, 1000)
+                                }
+                            }
+                            this.findByKey(product.key).then(doc => {
+                                if (doc) {
+                                    this.updateProduct(doc._id, product).then(finish)
+                                } else {
+                                    this.saveProduct(product).then(finish)
+                                }
+                            })
+                        })
                     })
-
                 } catch (e) {
                     this.$nextTick(_ => {
                         this.$message.error('导入失败，请重试！')
@@ -144,27 +169,28 @@
             },
             updateProduct(id, project) {
                 console.log('数据重复，更新：', project)
-                this.$db.update({_id: id}, project, {}, (err, numReplaced) => {
-                    this.loadData()
-                })
+                return new Promise(((resolve, reject) => {
+                    this.$db.update({_id: id}, project, {}, (err, numReplaced) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(numReplaced)
+                        }
+                    })
+                }))
             },
             saveProduct(product) {
-                this.$db.insert(product, (err, doc) => {
-                    this.loadData()
+                return new Promise((resolve, reject) => {
+                    this.$db.insert(product, (err, doc) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve(doc)
+                        }
+                    })
                 })
             },
-            saveOrUpdate(product) {
-                console.log('save', product)
-                //商品名称	主条码	单位	进价	零售价	备注
-                this.findByKey(product.key).exec((err, doc) => {
-                    if (doc) {
-                        this.updateProduct(doc._id, product)
-                    } else {
-                        this.saveProduct(product)
-                    }
-                })
 
-            },
             priceSearch() {
                 this.priceSearchVisible = true
             },

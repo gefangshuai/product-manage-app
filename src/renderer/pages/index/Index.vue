@@ -18,6 +18,7 @@
                 </a-upload>
 <!--                <a-button>批量删除</a-button>-->
                 <a-button type="primary" @click="priceSearch">价格查询</a-button>
+                <a-button @click="openDev">调试</a-button>
             </div>
         </div>
         <s-table :config="{dataSource: data, pagination: false}"
@@ -61,6 +62,7 @@
     import STable from "../../components/table/STable";
     import STableColumn from "../../components/table/STableColumn";
     import PriceSearch from "./PriceSearchModal";
+    import {remote} from 'electron'
 
     const columns = [
         {title: '自编号', dataIndex: 'key', key: 'key', width: 200},
@@ -169,6 +171,9 @@
             },
             handleSearch() {
                 this.loadData()
+            },
+            openDev() {
+                remote.getCurrentWebContents().openDevTools()
             }
         },
         beforeDestroy() {

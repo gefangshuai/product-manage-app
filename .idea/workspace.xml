@@ -22,10 +22,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/renderer/components" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/renderer/components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/renderer/components/layout" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
@@ -47,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602742525596</updated>
-      <workItem from="1602742526734" duration="730000" />
+      <workItem from="1602742526734" duration="13587000" />
     </task>
     <servers />
   </component>
@@ -59,21 +68,33 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="304" y="198" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602743116306" />
-    <state width="1659" height="280" key="GridCell.Tab.0.bottom" timestamp="1602743239863">
+    <state x="563" y="345" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602748140120">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1659" height="280" key="GridCell.Tab.0.bottom/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602743239863" />
-    <state width="1659" height="280" key="GridCell.Tab.0.center" timestamp="1602743239862">
+    <state x="563" y="345" key="#com.intellij.fileTypes.FileTypeChooser/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602748140120" />
+    <state width="1659" height="280" key="GridCell.Tab.0.bottom" timestamp="1602754889848">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1659" height="280" key="GridCell.Tab.0.center/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602743239862" />
-    <state width="1659" height="280" key="GridCell.Tab.0.left" timestamp="1602743239861">
+    <state width="1659" height="280" key="GridCell.Tab.0.bottom/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602754889848" />
+    <state width="1659" height="280" key="GridCell.Tab.0.center" timestamp="1602754889847">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1659" height="280" key="GridCell.Tab.0.left/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602743239861" />
-    <state width="1659" height="280" key="GridCell.Tab.0.right" timestamp="1602743239862">
+    <state width="1659" height="280" key="GridCell.Tab.0.center/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602754889847" />
+    <state width="1659" height="280" key="GridCell.Tab.0.left" timestamp="1602754889846">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1659" height="280" key="GridCell.Tab.0.right/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602743239862" />
+    <state width="1659" height="280" key="GridCell.Tab.0.left/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602754889846" />
+    <state width="1659" height="280" key="GridCell.Tab.0.right" timestamp="1602754889847">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1659" height="280" key="GridCell.Tab.0.right/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602754889847" />
+    <state x="538" y="291" width="604" height="490" key="find.popup" timestamp="1602746281265">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="538" y="291" width="604" height="490" key="find.popup/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602746281265" />
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1602747507279">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/1680.23.2048.1129/0.23.1680.1027@0.23.1680.1027" timestamp="1602747507279" />
   </component>
 </project>

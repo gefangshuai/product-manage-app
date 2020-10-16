@@ -12,16 +12,16 @@
             </div>
             <div class="mar-top-lgg"></div>
             <div v-for="product in products" class="margin-top" style="font-size: 16px;">
-                <a-divider></a-divider>
                 <div>
-                    名称：{{ product.name }}
-                </div>
-                <div>
+                    <strong style="font-size: 18px;">
+                        {{ product.name }}
+                    </strong>
+                    <a-divider type="vertical"/>
                     定价：{{ product.price }} 元
                     <a-divider type="vertical"/>
                     折扣：{{ product.discount }}
                     <a-divider type="vertical"/>
-                    折后价：<span style="font-size: 48px; color: red; font-weight: bold;">{{ product.sellPrice }}</span> 元
+                    折后价：<span style="font-size: 36px; color: red; font-weight: bold;">{{ product.sellPrice }}</span> 元
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
             handleSearch() {
                 console.log(this.code)
                 this.$db.find({code: this.code}, {}, (err, docs) => {
-                    this.products = docs
+                    this.products = docs.concat(docs).concat(docs).concat(docs).concat(docs)
                     this.showCode = this.code
                     this.code = ''
                     if (docs.length === 0) {

@@ -17,6 +17,7 @@
                     </a-button>
                 </a-upload>
                 <a-button @click="batchRemove">批量删除</a-button>
+                <a-button @click="removeAll">全部删除</a-button>
                 <a-button @click="openDev">调试</a-button>
             </div>
         </div>
@@ -218,6 +219,15 @@
                     }
                 } else {
                     this.$message.warning('请勾选要删除的商品！')
+                }
+            },
+            removeAll() {
+                if (confirm('确定要删除全部商品吗？')) {
+                    this.$db.remove({}, {multi: true}, (err, num) => {
+                        this.selectedRowKeys = []
+                        this.loadData()
+                        this.$message.success('删除成功！')
+                    })
                 }
             }
         },

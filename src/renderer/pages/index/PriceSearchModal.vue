@@ -55,7 +55,7 @@
             handleSearch() {
                 console.log(this.code)
                 this.$db.find({code: this.code}, {}, (err, docs) => {
-                    this.products = docs.concat(docs).concat(docs).concat(docs).concat(docs)
+                    this.products = docs
                     this.showCode = this.code
                     this.code = ''
                     if (docs.length === 0) {
